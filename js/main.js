@@ -2,28 +2,6 @@
  * Super Hacky Fun Time Minesweeper Clone
  */
 
-// the only thing borrowed from anywhere. I didn't feel like doing this myself and just needed some coords.
-function relMouseCoords(event){
-    var totalOffsetX = 0;
-    var totalOffsetY = 0;
-    var canvasX = 0;
-    var canvasY = 0;
-    var currentElement = this;
-
-    do{
-        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-    }
-    while(currentElement = currentElement.offsetParent)
-
-    canvasX = event.pageX - totalOffsetX;
-    canvasY = event.pageY - totalOffsetY;
-
-    return {x:canvasX, y:canvasY}
-}
-HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
-
-
 /**
  * Originally, the cells were stored in a flat 1D array. This made some things easier,
  * but made understanding and moving around the grid a little strange because everything
@@ -48,8 +26,8 @@ $(function() {
         WIN: 2
     };
 
-    var canvas = $("#main_game")[0];
-    var ctx = canvas.getContext("2d");
+    var canvas = $("#main_game");
+    var ctx = canvas[0].getContext("2d");
     var cells = [];
     var setFlags = 0;
     var revealedCells = 0;
@@ -244,15 +222,14 @@ $(function() {
 //    function update(dt) {}
 
     function handleClick(e) {
-        var coords = canvas.relMouseCoords(e);
-        var cell = Cell.cellAtTapPoint(coords.x, coords.y);
+        var cell = Cell.cellAtTapPoint(e.pageX - canvas.offset().left, e.pageY - canvas.offset().top);
         cell.click(e);
     }
 
     function render() {
         // Make sure to clear this thing out each time.
         ctx.fillStyle = "#000000";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, canvas[0].width, canvas[0].height);
 
 
         for(var y = 0; y < ROWS; y++) {
@@ -278,8 +255,8 @@ $(function() {
         var now = Date.now();
         var dt = (now - lastTime) / 1000.0;
 
-       // Update wasn't really needed for this game.
-       // Well, neither was a game loop, but whatevs.
+        // Update wasn't really needed for this game.
+        // Well, neither was a game loop, but whatevs.
 //        update(dt);
         render();
 
@@ -289,9 +266,7 @@ $(function() {
 
     function start() {
         Cell.generateCells();
-
-        canvas.onclick = handleClick;
-
+        canvas.click(handleClick)
         main();
     }
     start();
