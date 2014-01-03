@@ -31,6 +31,16 @@
         <h1>
 <a name="mine-finder" class="anchor" href="#mine-finder"><span class="octicon octicon-link"></span></a>Mine Finder</h1>
 
+<div>
+        <div class="scoreboard">
+            Mines Left: <span id="mine_count">-</span>
+        </div>
+        <canvas id="main_game" width="512" height="512"></canvas>
+        <div class="legend">
+            Click to Reveal. Shift-Click to Flag. Refresh the page to start over.
+        </div>
+        </div>
+
 <p>Mine Finder is a very, very basic minesweeper clone.</p>
 
 <p>It only supports a 16x16 grid with 20 mines.</p>
@@ -48,7 +58,9 @@
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="https://raw.github.com/leeadkins/minefinder/master/js/main.js"></script>
+
   </body>
 </html>
