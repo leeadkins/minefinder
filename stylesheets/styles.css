@@ -253,3 +253,9 @@ footer {
     color:#444;
   }
 }
+
+.legend {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 25px;
+}
