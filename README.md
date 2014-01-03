@@ -2,6 +2,8 @@
 
 Mine Finder is a very, very basic minesweeper clone.
 
+You can see a demo here: http://leeadkins.github.io/minefinder/
+
 It only supports a 16x16 grid with 20 mines.
 
 To reveal a square, click it. Shift-click to place a flag (which just turns the cell red).
